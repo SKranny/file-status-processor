@@ -23,6 +23,7 @@ public class StatusProcessorServiceImpl implements StatusProcessorService {
     public void updateStatus(FileStatusDTO fileStatusDTO) {
         FileStatus fileStatus = FileStatus.builder()
                 .fileStatus(fileStatusDTO.getFileStatus())
+                .fileBytes(fileStatusDTO.getFileBytes())
                 .fileName(fileStatusDTO.getFileName())
                 .build();
         fileStatusRepository.save(fileStatus);
@@ -34,6 +35,7 @@ public class StatusProcessorServiceImpl implements StatusProcessorService {
                 .orElseThrow(() -> new RuntimeException("File with name:{fileName} not found")); // byte
         return FileStatusDTO.builder()
                 .fileName(fileStatus.getFileName())
+                .fileBytes(fileStatus.getFileBytes())
                 .fileStatus(fileStatus.getFileStatus())
                 .build();
     }
@@ -42,6 +44,7 @@ public class StatusProcessorServiceImpl implements StatusProcessorService {
     public void postStatus(FileStatusDTO fileStatusDTO) {
         FileStatus fileStatus = FileStatus.builder()
                 .fileStatus(fileStatusDTO.getFileStatus())
+                .fileBytes(fileStatusDTO.getFileBytes())
                 .fileName(fileStatusDTO.getFileName())
                 .build();
         fileStatusRepository.save(fileStatus);
