@@ -4,6 +4,6 @@ import com.example.filestatusprocessor.dto.FileStatusDTO;
 
 public interface StatusProcessorService {
     void updateStatus(FileStatusDTO fileStatusDTO);
-    FileStatusDTO getStatus(String fileName);
+    FileStatusDTO getStatus(byte[] fileBytes);
     void postStatus(FileStatusDTO fileStatusDTO);
 }

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface FileStatusRepository extends MongoRepository<FileStatus, String> {
-    Optional<FileStatus> findByFileName(String fileName);
+    Optional<FileStatus> findByFileBytes(byte[] fileBytes);
 }

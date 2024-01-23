@@ -29,9 +29,9 @@ public class StatusProcessorServiceImpl implements StatusProcessorService {
     }
 
     @Override
-    public FileStatusDTO getStatus(String fileName) {
-        FileStatus fileStatus = fileStatusRepository.findByFileName(fileName)
-                .orElseThrow(() -> new RuntimeException("File with name:{fileName} not found"));
+    public FileStatusDTO getStatus(byte[] fileBytes) {
+        FileStatus fileStatus = fileStatusRepository.findByFileBytes(fileBytes)
+                .orElseThrow(() -> new RuntimeException("File with name:{fileName} not found")); // byte
         return FileStatusDTO.builder()
                 .fileName(fileStatus.getFileName())
                 .fileStatus(fileStatus.getFileStatus())

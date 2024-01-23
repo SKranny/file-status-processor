@@ -12,8 +12,8 @@ public class StatusController {
     private final StatusProcessorService statusProcessorService;
 
     @GetMapping
-    public FileStatusDTO checkFileStatus(@RequestParam String fileName){
-        return statusProcessorService.getStatus(fileName);
+    public FileStatusDTO checkFileStatus(FileStatusDTO fileStatusDTO){
+        return statusProcessorService.getStatus(fileStatusDTO.getFileBytes());
     }
     @PostMapping
     public void postStatus(FileStatusDTO fileStatusDTO){

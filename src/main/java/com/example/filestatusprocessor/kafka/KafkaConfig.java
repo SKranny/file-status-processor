@@ -33,6 +33,7 @@ public class KafkaConfig {
         configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         return new KafkaAdmin(configs);
     }
+    // todo
 
     @Bean
     public DefaultKafkaConsumerFactory<String, Object> consumerFactory(){
@@ -40,7 +41,7 @@ public class KafkaConfig {
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class); // StringDesirialize вместо JsonDesirializer...
         return new DefaultKafkaConsumerFactory<>(props);
     }
 
@@ -61,6 +62,7 @@ public class KafkaConfig {
         props.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, "5000000");
         return props;
     }
+    //
 
     @Bean
     public DefaultKafkaProducerFactory<String, Object> producerFactory(){

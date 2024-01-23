@@ -19,29 +19,35 @@ class StatusProcessorServiceImplTest {
 
     @Test
     void getStatus() {
+        byte[] bytes = new byte[]{1,2,3};
         FileStatus fileStatus = FileStatus.builder()
                 .fileName("file.xls")
+                .fileBytes(bytes)
                 .fileStatus(FileProcessStatus.FIRST_VALIDATION_COMPLETED)
                 .build();
         FileStatusDTO fileStatusDTO = FileStatusDTO.builder()
                 .fileStatus(fileStatus.getFileStatus())
+                .fileBytes(fileStatus.getFileBytes())
                 .fileName(fileStatus.getFileName())
                 .build();
 
-        when(fileStatusRepository.findByFileName("file.xls")).thenReturn(Optional.of(fileStatus));
+        when(fileStatusRepository.findByFileBytes(bytes)).thenReturn(Optional.of(fileStatus));
 
-        assertEquals(fileStatusDTO, statusProcessorService.getStatus("file.xls"));
+        assertEquals(fileStatusDTO, statusProcessorService.getStatus(fileStatusDTO.getFileBytes()));
     }
 
     @Test
     void postStatus(){
+        byte[] bytes = new byte[]{1,2,3};
         FileStatusDTO fileStatusDTO = FileStatusDTO
                 .builder()
+                .fileBytes(bytes)
                 .fileName("file.xls")
                 .fileStatus(FileProcessStatus.FIRST_VALIDATION_COMPLETED)
                 .build();
         FileStatus fileStatus = FileStatus.builder()
                 .fileStatus(fileStatusDTO.getFileStatus())
+                .fileBytes(fileStatusDTO.getFileBytes())
                 .fileName(fileStatusDTO.getFileName())
                 .build();
         assertEquals(fileStatusDTO.getFileStatus(), fileStatus.getFileStatus());
@@ -49,13 +55,16 @@ class StatusProcessorServiceImplTest {
 
     @Test
     void updateStatus(){
+        byte[] bytes = new byte[]{1,2,3};
         FileStatusDTO fileStatusDTO = FileStatusDTO
                 .builder()
+                .fileBytes(bytes)
                 .fileName("file.xls")
                 .fileStatus(FileProcessStatus.SECOND_VALIDATION_COMPLETED)
                 .build();
         FileStatus fileStatus = FileStatus.builder()
                 .fileStatus(fileStatusDTO.getFileStatus())
+                .fileBytes(fileStatusDTO.getFileBytes())
                 .fileName(fileStatusDTO.getFileName())
                 .build();
         assertEquals(fileStatusDTO.getFileStatus(), fileStatus.getFileStatus());

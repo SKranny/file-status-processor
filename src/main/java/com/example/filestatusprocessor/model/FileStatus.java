@@ -14,5 +14,6 @@ public class FileStatus {
     @Id
     private String id;
     private String fileName;
+    private byte[] fileBytes;
     private FileProcessStatus fileStatus;
 }
